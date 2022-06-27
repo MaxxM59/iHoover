@@ -75,7 +75,7 @@
             <mat-form-field appearance="fill">
               <label for="titre"><h2>Orientation initiale</h2></label>
 
-              <mat-select>
+              <mat-select value="N">
                 <mat-option value="N">North</mat-option>
                 <mat-option value="E">East</mat-option>
                 <mat-option value="W">West</mat-option>
@@ -98,9 +98,8 @@
         <div *ngIf="isUntouched === true"></div>
         <div id="result" *ngIf="isLoading === false && isOver === true">
           <h2>
-            Formidable ! <br />L'aspirateur a terminé son parcours à la case ({{
-              finalLocation.xFinal
-            }},{{ finalLocation.yFinal }}).
+            Formidable ! <br />L'aspirateur a terminé son parcours sur la case
+            ({{ finalLocation.xFinal }},{{ finalLocation.yFinal }}).
           </h2>
         </div>
         <div *ngIf="isLoading === true && isOver === false">

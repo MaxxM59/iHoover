@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
 
   launcher() {
     if (this.squareForm.valid) {
+      this.isUntouched = false;
       // get values from the form
       this.square.xSquare = Number(this.squareForm.value.xSquare);
       this.square.ySquare = Number(this.squareForm.value.ySquare);
