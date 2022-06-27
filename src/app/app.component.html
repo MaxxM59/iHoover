@@ -13,11 +13,10 @@
                 type="number"
                 class="form-control"
                 formControlName="xSquare"
-                [(ngModel)]="square.xSquare"
                 min="2"
-                max="25"
+                max="2500"
+                xSquare="ngModel"
               />
-
               <mat-hint>La valeur doit être superieure à 2.</mat-hint>
             </mat-form-field></mat-grid-tile
           >
@@ -29,9 +28,8 @@
                 type="number"
                 class="form-control"
                 formControlName="ySquare"
-                [(ngModel)]="square.ySquare"
                 min="2"
-                max="25"
+                max="2500"
               />
               <mat-hint>La valeur doit être superieure à 2.</mat-hint>
             </mat-form-field>
@@ -46,7 +44,6 @@
                 type="number"
                 class="form-control"
                 formControlName="xCurrent"
-                [(ngModel)]="currentLocation.xCurrent"
                 min="0"
                 max="{{ squareForm.value.xSquare }}"
               />
@@ -64,7 +61,6 @@
                 type="number"
                 class="form-control"
                 formControlName="yCurrent"
-                [(ngModel)]="currentLocation.yCurrent"
                 min="0"
                 max="{{ squareForm.value.ySquare }}"
               />
@@ -79,7 +75,7 @@
             <mat-form-field appearance="fill">
               <label for="titre"><h2>Orientation initiale</h2></label>
 
-              <mat-select required>
+              <mat-select>
                 <mat-option value="N">North</mat-option>
                 <mat-option value="E">East</mat-option>
                 <mat-option value="W">West</mat-option>
@@ -102,7 +98,7 @@
         <div *ngIf="isUntouched === true"></div>
         <div id="result" *ngIf="isLoading === false && isOver === true">
           <h2>
-            L'aspirateur a terminé son parcours à la case ({{
+            Formidable ! <br />L'aspirateur a terminé son parcours à la case ({{
               finalLocation.xFinal
             }},{{ finalLocation.yFinal }}).
           </h2>

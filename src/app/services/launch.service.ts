@@ -1,37 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { CurrentLocation, FinalLocation, Square } from '../models/model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LaunchService {
-  constructor(private router: Router) {}
+  constructor() {}
 
-  // loading handler variables
-  isLoading: boolean = false;
-  launchHoover() {
-    let square: Square = {
-      xSquare: 0,
-      ySquare: 0,
-    };
-    let currentLocation: CurrentLocation = {
-      xCurrent: 0,
-      yCurrent: 0,
-      direction: '',
-      orientation: '',
-    };
-    let finalLocation: FinalLocation = {
-      xFinal: 0,
-      yFinal: 0,
-      orientation: '',
-    };
-
+  launchHoover(
+    square: Square,
+    currentLocation: CurrentLocation,
+    finalLocation: FinalLocation
+  ) {
     // Spliting the area in 4 sub-areas
     switch (true && true) {
       // top right
       case currentLocation.xCurrent >= square.xSquare / 2 &&
         currentLocation.yCurrent >= square.ySquare / 2: {
+        console.log('CASE 1 : top right');
         //check initial direction and go to east
         switch (currentLocation.orientation) {
           case 'N':
@@ -50,9 +36,8 @@ export class LaunchService {
               currentLocation.direction = 'G';
             }
             break;
-          default: {
+          default:
             return null;
-          }
         }
 
         // go to (xSquare-1) column
@@ -78,14 +63,14 @@ export class LaunchService {
         while (currentLocation.xCurrent > 0) {
           // check if the hoover is at the top of the area
           if (currentLocation.yCurrent === square.ySquare) {
-            for (let i = 0; i < square.ySquare; i++) {
+            for (let i = 0; i <= square.ySquare; i++) {
               currentLocation.direction = 'A';
               currentLocation.yCurrent--;
             }
           }
           // else the hoover is at the bottom of the area
           else {
-            for (let i = 0; i < square.ySquare; i++) {
+            for (let i = 0; i <= square.ySquare; i++) {
               currentLocation.direction = 'A';
               currentLocation.yCurrent++;
             }
@@ -99,16 +84,17 @@ export class LaunchService {
           } else {
             currentLocation.orientation = 'N';
           }
+          finalLocation.xFinal = currentLocation.xCurrent;
+          finalLocation.yFinal = currentLocation.yCurrent;
+          finalLocation.orientation = currentLocation.orientation;
         }
-        finalLocation.xFinal = currentLocation.xCurrent;
-        finalLocation.yFinal = currentLocation.yCurrent;
-        finalLocation.orientation = currentLocation.orientation;
         return null;
       }
 
       // top left
       case currentLocation.xCurrent < square.xSquare / 2 &&
         currentLocation.yCurrent >= square.ySquare / 2: {
+        console.log('CASE 2 : top left');
         //check initial direction and go to west
         switch (currentLocation.orientation) {
           case 'N':
@@ -155,14 +141,14 @@ export class LaunchService {
         while (currentLocation.xCurrent >= square.xSquare) {
           // check if the hoover is at the top of the area
           if (currentLocation.yCurrent === square.ySquare) {
-            for (let i = 0; i < square.ySquare; i++) {
+            for (let i = 0; i <= square.ySquare; i++) {
               currentLocation.direction = 'A';
               currentLocation.yCurrent--;
             }
           }
           // else the hoover is at the bottom of the area
           else {
-            for (let i = 0; i < square.ySquare; i++) {
+            for (let i = 0; i <= square.ySquare; i++) {
               currentLocation.direction = 'A';
               currentLocation.yCurrent++;
             }
@@ -176,16 +162,17 @@ export class LaunchService {
           } else {
             currentLocation.orientation = 'N';
           }
+          finalLocation.xFinal = currentLocation.xCurrent;
+          finalLocation.yFinal = currentLocation.yCurrent;
+          finalLocation.orientation = currentLocation.orientation;
         }
-        finalLocation.xFinal = currentLocation.xCurrent;
-        finalLocation.yFinal = currentLocation.yCurrent;
-        finalLocation.orientation = currentLocation.orientation;
         return null;
       }
 
       //bottom right
       case currentLocation.xCurrent >= square.xSquare / 2 &&
         currentLocation.yCurrent < square.ySquare / 2: {
+        console.log('CASE 3 : bottom right');
         {
           //check initial direction and go to east
           switch (currentLocation.orientation) {
@@ -206,7 +193,11 @@ export class LaunchService {
               }
               break;
             default: {
-              return null;
+              return (
+                (finalLocation.xFinal = currentLocation.xCurrent),
+                (finalLocation.yFinal = currentLocation.yCurrent),
+                (finalLocation.orientation = currentLocation.orientation)
+              );
             }
           }
 
@@ -233,14 +224,14 @@ export class LaunchService {
           while (currentLocation.xCurrent > 0) {
             // check if the hoover is at the top of the area
             if (currentLocation.yCurrent === square.ySquare) {
-              for (let i = 0; i < square.ySquare; i++) {
+              for (let i = 0; i <= square.ySquare; i++) {
                 currentLocation.direction = 'A';
                 currentLocation.yCurrent--;
               }
             }
             // else the hoover is at the bottom of the area
             else {
-              for (let i = 0; i < square.ySquare; i++) {
+              for (let i = 0; i <= square.ySquare; i++) {
                 currentLocation.direction = 'A';
                 currentLocation.yCurrent++;
               }
@@ -266,6 +257,7 @@ export class LaunchService {
       case currentLocation.xCurrent < square.xSquare / 2 &&
         currentLocation.yCurrent < square.ySquare / 2:
         {
+          console.log('CASE 4:bottom left');
           //check initial direction and go to west
           switch (currentLocation.orientation) {
             case 'N':
@@ -285,7 +277,11 @@ export class LaunchService {
               }
               break;
             default: {
-              return null;
+              return (
+                (finalLocation.xFinal = currentLocation.xCurrent),
+                (finalLocation.yFinal = currentLocation.yCurrent),
+                (finalLocation.orientation = currentLocation.orientation)
+              );
             }
           }
 
@@ -312,14 +308,14 @@ export class LaunchService {
           while (currentLocation.xCurrent >= square.xSquare) {
             // check if the hoover is at the top of the area
             if (currentLocation.yCurrent === square.ySquare) {
-              for (let i = 0; i < square.ySquare; i++) {
+              for (let i = 0; i <= square.ySquare; i++) {
                 currentLocation.direction = 'A';
                 currentLocation.yCurrent--;
               }
             }
             // else the hoover is at the bottom of the area
             else {
-              for (let i = 0; i < square.ySquare; i++) {
+              for (let i = 0; i <= square.ySquare; i++) {
                 currentLocation.direction = 'A';
                 currentLocation.yCurrent++;
               }
@@ -339,12 +335,18 @@ export class LaunchService {
           finalLocation.yFinal = currentLocation.yCurrent;
           finalLocation.orientation = currentLocation.orientation;
         }
-        return null;
+        return (
+          (finalLocation.xFinal = currentLocation.xCurrent),
+          (finalLocation.yFinal = currentLocation.yCurrent),
+          (finalLocation.orientation = currentLocation.orientation)
+        );
 
       default: {
-        return (finalLocation.xFinal = currentLocation.xCurrent);
-        finalLocation.yFinal = currentLocation.yCurrent;
-        finalLocation.orientation = currentLocation.orientation;
+        return (
+          (finalLocation.xFinal = currentLocation.xCurrent),
+          (finalLocation.yFinal = currentLocation.yCurrent),
+          (finalLocation.orientation = currentLocation.orientation)
+        );
       }
     }
   }
