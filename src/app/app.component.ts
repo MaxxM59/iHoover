@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Square, CurrentLocation, FinalLocation } from './models/model';
 import { LaunchService } from './services/launch.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,10 +25,12 @@ export class AppComponent implements OnInit {
     xCurrent: 0,
     yCurrent: 0,
     direction: '',
+    orientation: '',
   };
   public finalLocation: FinalLocation = {
-    xFinal: 0,
-    yFinal: 0,
+    xFinal: 5,
+    yFinal: 5,
+    orientation: '',
   };
   // loading handler variables
   isLoading: boolean = false;
@@ -31,11 +39,35 @@ export class AppComponent implements OnInit {
 
   // User form
   squareForm = new FormGroup({
-    xSquare: new FormControl('', [Validators.required, Validators.min(2)]),
-    ySquare: new FormControl('', [Validators.required, Validators.min(2)]),
-    xCurrent: new FormControl('', [Validators.required]),
-    yCurrent: new FormControl('', [Validators.required]),
+    xSquare: new FormControl(0, [Validators.required, Validators.min(2)]),
+    ySquare: new FormControl(0, [Validators.required, Validators.min(2)]),
+    xCurrent: new FormControl(0, [
+      Validators.required,
+      (control: AbstractControl) =>
+        Validators.max(this.square.xSquare)(control),
+    ]),
+    yCurrent: new FormControl(0, [
+      Validators.required,
+      (control: AbstractControl) =>
+        Validators.max(this.square.ySquare)(control),
+    ]),
+    orientation: new FormControl('valid', [
+      Validators.required,
+      Validators.pattern('valid'),
+    ]),
   });
+  launcher() {
+    if (this.squareForm.valid) {
+      this.isLoading = true;
+      this.currentLocation.xCurrent = Number(this.squareForm.value.xCurrent);
+      this.currentLocation.yCurrent = Number(this.squareForm.value.yCurrent);
+      this.square.xSquare = Number(this.squareForm.value.xSquare);
+      this.square.ySquare = Number(this.squareForm.value.ySquare);
+      this.launch.launchHoover();
+      this.isLoading = false;
+      this.isOver = true;
+    }
+  }
 
   ngOnInit(): void {
     this.isUntouched = true;
