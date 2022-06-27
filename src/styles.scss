@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@include mat.core();
+$iHoover-primary: mat.define-palette(mat.$indigo-palette);
+$iHoover-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$iHoover-warn: mat.define-palette(mat.$red-palette);
+$iHoover-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $iHoover-primary,
+      accent: $iHoover-accent,
+      warn: $iHoover-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($iHoover-theme);
+
+body {
+  background-color: lightgrey;
+  font-family: Georgia, serif;
+}

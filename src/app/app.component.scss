@@ -1,0 +1,39 @@
+mat-card {
+  border-radius: 15px;
+  width: 80%;
+  display: block;
+  margin: auto;
+  margin-top: 5vh;
+}
+
+#launchButton {
+  background-color: #0388fc;
+  display: block;
+  margin: auto;
+  width: 35%;
+  margin-bottom: 2vh;
+  color: white;
+}
+mat-form-field {
+  padding-top: 1vh;
+  padding-bottom: 3vh;
+  width: 70%;
+}
+h1 {
+  display: block;
+  margin: auto;
+  font-size: 220%;
+  padding-bottom: 2vh;
+}
+#loadingSpinner {
+  margin: auto;
+  display: block;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  width: 10%;
+}
+#result {
+  text-align: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
