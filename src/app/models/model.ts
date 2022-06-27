@@ -5,6 +5,7 @@ export interface Square {
 export interface CurrentLocation {
   xCurrent: number;
   yCurrent: number;
+  direction: string;
 }
 export interface FinalLocation {
   xFinal: number;

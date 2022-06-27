@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   public currentLocation: CurrentLocation = {
     xCurrent: 0,
     yCurrent: 0,
+    direction: '',
   };
   public finalLocation: FinalLocation = {
     xFinal: 0,
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit {
     xCurrent: new FormControl('', [Validators.required]),
     yCurrent: new FormControl('', [Validators.required]),
   });
+
   ngOnInit(): void {
     this.isUntouched = true;
   }
