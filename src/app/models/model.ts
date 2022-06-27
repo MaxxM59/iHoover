@@ -2,7 +2,7 @@ export interface Square {
   xSquare: number;
   ySquare: number;
 }
-export interface Location {
+export interface CurrentLocation {
   xCurrent: number;
   yCurrent: number;
 }

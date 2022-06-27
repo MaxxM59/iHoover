@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Square, Location, FinalLocation } from './models/model';
+import { Square, CurrentLocation, FinalLocation } from './models/model';
 import { LaunchService } from './services/launch.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(public launch: LaunchService) {}
   title = 'iHoover';
   // logic variables
@@ -15,7 +15,7 @@ export class AppComponent {
     xSquare: 0,
     ySquare: 0,
   };
-  public currentLocation: Location = {
+  public currentLocation: CurrentLocation = {
     xCurrent: 0,
     yCurrent: 0,
   };
@@ -25,6 +25,8 @@ export class AppComponent {
   };
   // loading handler variables
   isLoading: boolean = false;
+  isOver: boolean = false;
+  isUntouched: boolean = true;
 
   // User form
   squareForm = new FormGroup({
@@ -33,4 +35,7 @@ export class AppComponent {
     xCurrent: new FormControl('', [Validators.required]),
     yCurrent: new FormControl('', [Validators.required]),
   });
+  ngOnInit(): void {
+    this.isUntouched = true;
+  }
 }

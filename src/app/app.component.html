@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-header><h1>iHoover - Maxime Magnez</h1></mat-card-header>
     <mat-card-content>
-      <form [formGroup]="squareForm" (ngSubmit)="this.launch.launch()">
+      <form [formGroup]="squareForm">
         <mat-grid-list cols="2" rowHeight="4:1">
           <mat-grid-tile>
             <mat-form-field>
@@ -68,17 +68,18 @@
         </button>
       </form>
       <mat-card-footer>
-        <div id="result" *ngIf="isLoading === false; else loading">
+        <div *ngIf="isUntouched === true"></div>
+        <div id="result" *ngIf="isLoading === false && isOver === true">
           <h2>
             L'aspirateur a terminé son parcours à la case ({{
               finalLocation.xFinal
             }},{{ finalLocation.yFinal }}).
           </h2>
         </div>
+        <div *ngIf="isLoading === true && isOver === false">
+          <mat-spinner id="loadingSpinner" [diameter]="50"></mat-spinner>
+        </div>
       </mat-card-footer>
     </mat-card-content>
   </mat-card>
 </ng-container>
-<ng-template #loading>
-  <mat-spinner id="loadingSpinner" [diameter]="50"></mat-spinner
-></ng-template>
