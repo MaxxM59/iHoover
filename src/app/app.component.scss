@@ -19,7 +19,7 @@ mat-form-field {
 form {
   min-height: 300px;
 }
-#launchButton {
+.buttonSquareForm {
   background-color: #0388fc;
   display: block;
   margin: auto;
@@ -39,17 +39,9 @@ form {
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
-#result-tab {
+#result-title {
   display: block;
   margin: auto;
-  width: 40%;
-  text-align: center;
-  justify-content: center;
-}
-td,
-tr {
-  width: 100%;
-  display: block;
-  margin: auto;
-  text-align: center;
+  font-size: 150%;
+  padding-bottom: 2vh;
 }

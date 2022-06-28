@@ -8,10 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatGridListModule } from '@angular/material/grid-list';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSliderModule } from '@angular/material/slider';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,10 +24,9 @@ import { MatSliderModule } from '@angular/material/slider';
     MatButtonModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatGridListModule,
+
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

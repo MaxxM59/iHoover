@@ -66,7 +66,6 @@
 
         <mat-form-field appearance="fill">
           <label for="titre"><h2>Orientation initiale</h2></label>
-
           <mat-select value="North">
             <mat-option value="North">North</mat-option>
             <mat-option value="East">East</mat-option>
@@ -76,7 +75,7 @@
         </mat-form-field>
 
         <button
-          id="launchButton"
+          class="buttonSquareForm"
           mat-raised-button
           type="submit"
           (click)="launcher()"
@@ -87,21 +86,22 @@
       <mat-card-footer>
         <div *ngIf="isUntouched === true"></div>
         <div id="result" *ngIf="isLoading === false && isOver === true">
-          <h1>
-            Formidable ! <br />L'aspirateur a terminé son parcours sur la case
-            ({{ finalLocation.xFinal }},{{ finalLocation.yFinal }}).
-          </h1>
-
-          <table id="result-tab" mat-table class="mat-elevation-z8">
-            <ng-container
-              *ngFor="let done of this.launch.doneAreas; index as i"
+          <mat-card>
+            <mat-card-header>
+              <h1 id="result-title">
+                Formidable ! <br />L'aspirateur a terminé son parcours sur la
+                case ({{ finalLocation.xFinal }},{{ finalLocation.yFinal }}).
+              </h1></mat-card-header
             >
-              <hr />
-              <td>
-                Case n° {{ i + 1 }} => ({{ done.xCurrent }},{{ done.yCurrent }})
-              </td>
-            </ng-container>
-          </table>
+            <mat-card-content>
+              <ng-container
+                *ngFor="let done of this.launch.doneAreas; index as i"
+                >Case n° {{ i + 1 }} => ({{ done.xCurrent }},{{
+                  done.yCurrent
+                }}) <br />
+              </ng-container>
+            </mat-card-content>
+          </mat-card>
         </div>
         <div *ngIf="isLoading === true && isOver === false">
           <mat-spinner id="loadingSpinner" [diameter]="50"></mat-spinner>
