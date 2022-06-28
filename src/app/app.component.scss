@@ -1,4 +1,4 @@
-h1 {
+#main-title {
   display: block;
   margin: auto;
   font-size: 220%;
@@ -9,16 +9,12 @@ mat-card {
   width: 80%;
   display: block;
   margin: auto;
-  margin-top: 5vh;
 }
-#squareForm {
-  height: 50vh;
-}
-mat-form-field {
-  padding-top: 2vh;
-  padding-bottom: 4vh;
 
-  width: 70%;
+mat-form-field {
+  width: 50vw;
+  display: block;
+  margin: auto;
 }
 form {
   min-height: 300px;
@@ -56,9 +52,4 @@ tr {
   display: block;
   margin: auto;
   text-align: center;
-}
-@media (max-width: 800px) {
-  mat-grid-list {
-    flex-direction: column;
-  }
 }
