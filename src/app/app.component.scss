@@ -11,17 +11,24 @@ mat-card {
   margin: auto;
   margin-top: 5vh;
 }
+#squareForm {
+  height: 50vh;
+}
 mat-form-field {
-  padding-top: 1vh;
+  padding-top: 2vh;
   padding-bottom: 4vh;
+
   width: 70%;
+}
+form {
+  min-height: 300px;
 }
 #launchButton {
   background-color: #0388fc;
   display: block;
   margin: auto;
   width: 35%;
-  margin-top: 2vh;
+  margin-top: 4vh;
   margin-bottom: 2vh;
   color: white;
 }
@@ -49,4 +56,9 @@ tr {
   display: block;
   margin: auto;
   text-align: center;
+}
+@media (max-width: 800px) {
+  mat-grid-list {
+    flex-direction: column;
+  }
 }
