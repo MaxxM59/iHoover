@@ -56,7 +56,8 @@ export class LaunchService {
         // go to (xSquare-1) column
         while (currentLocation.xCurrent < square.xSquare - 1) {
           currentLocation.direction = 'A';
-          ++currentLocation.xCurrent;
+          currentLocation.xCurrent++;
+          // save current location
           currentLocation = {
             xCurrent: currentLocation.xCurrent,
             yCurrent: currentLocation.yCurrent,
@@ -75,7 +76,8 @@ export class LaunchService {
         // go to the highest line
         while (currentLocation.yCurrent !== square.ySquare) {
           currentLocation.direction = 'A';
-          ++currentLocation.yCurrent;
+          currentLocation.yCurrent++;
+          // save current location
           currentLocation = {
             xCurrent: currentLocation.xCurrent,
             yCurrent: currentLocation.yCurrent,
@@ -90,7 +92,8 @@ export class LaunchService {
         currentLocation.direction = 'D';
         currentLocation.orientation = 'E';
         currentLocation.direction = 'A';
-        ++currentLocation.xCurrent;
+        currentLocation.xCurrent++;
+        // save current location
         currentLocation = {
           xCurrent: currentLocation.xCurrent,
           yCurrent: currentLocation.yCurrent,
@@ -102,13 +105,14 @@ export class LaunchService {
         currentLocation.orientation = 'S';
         console.log(currentLocation);
         console.log('get ready for the loops');
-        // loop over the remainings columns
+        // loop over the remainings columns till col 1
         while (currentLocation.xCurrent > 0) {
           // check if the hoover is at the top of the area
           if (currentLocation.yCurrent === square.ySquare) {
-            for (let i = 0; i <= square.ySquare; i++) {
+            for (let i = 0; i < square.ySquare; i++) {
               currentLocation.direction = 'A';
-              --currentLocation.yCurrent;
+              currentLocation.yCurrent--;
+              // save current location
               currentLocation = {
                 xCurrent: currentLocation.xCurrent,
                 yCurrent: currentLocation.yCurrent,
@@ -117,14 +121,15 @@ export class LaunchService {
               };
               this.doneAreas.push(currentLocation);
               console.log(currentLocation);
-              console.log(` doing loop number `, i + 1);
+              console.log(` done loop number `, i + 1);
             }
           }
           // else the hoover is at the bottom of the area
           else {
-            for (let i = 0; i <= square.ySquare; i++) {
+            for (let i = 0; i < square.ySquare; i++) {
               currentLocation.direction = 'A';
-              ++currentLocation.yCurrent;
+              currentLocation.yCurrent++;
+              // save current location
               currentLocation = {
                 xCurrent: currentLocation.xCurrent,
                 yCurrent: currentLocation.yCurrent,
@@ -133,12 +138,24 @@ export class LaunchService {
               };
               this.doneAreas.push(currentLocation);
               console.log(currentLocation);
-              console.log(` doing loop number `, i + 1);
+              console.log(` do loop number `, i + 1);
             }
           }
-          currentLocation.direction = 'G';
-          currentLocation.direction = 'A';
-          --currentLocation.xCurrent;
+          if (currentLocation.yCurrent === square.ySquare) {
+            currentLocation.direction = 'G';
+            currentLocation.direction = 'A';
+            currentLocation.xCurrent--;
+            currentLocation.direction = 'G';
+            currentLocation.orientation = 'S';
+          } else {
+            currentLocation.direction = 'D';
+            currentLocation.direction = 'A';
+            currentLocation.xCurrent--;
+            currentLocation.direction = 'D';
+            currentLocation.orientation = 'N';
+          }
+
+          // save current location
           currentLocation = {
             xCurrent: currentLocation.xCurrent,
             yCurrent: currentLocation.yCurrent,
@@ -146,17 +163,51 @@ export class LaunchService {
             orientation: currentLocation.orientation,
           };
           this.doneAreas.push(currentLocation);
-          currentLocation.direction = 'G';
-          if (currentLocation.yCurrent === square.ySquare) {
-            currentLocation.orientation = 'S';
-          } else {
-            currentLocation.orientation = 'N';
-          }
-          this.doneAreas.push(currentLocation);
-          finalLocation.xFinal = currentLocation.xCurrent;
-          finalLocation.yFinal = currentLocation.yCurrent;
-          finalLocation.orientation = currentLocation.orientation;
         }
+        console.log('starting last col !');
+        // Doing the last col
+        if (currentLocation.yCurrent === square.ySquare) {
+          //if the hoover starts last col from the top of area
+          for (let i = 0; i < square.ySquare; i++) {
+            currentLocation.direction = 'G';
+            currentLocation.direction = 'A';
+            currentLocation.yCurrent--;
+            // save current location
+            currentLocation = {
+              xCurrent: currentLocation.xCurrent,
+              yCurrent: currentLocation.yCurrent,
+              direction: currentLocation.direction,
+              orientation: currentLocation.orientation,
+            };
+          }
+        }
+        // else starting from bottom
+        else {
+          for (let i = 0; i < square.ySquare; i++) {
+            currentLocation.direction = 'D';
+            currentLocation.direction = 'A';
+            currentLocation.yCurrent++;
+            // save current location
+            currentLocation = {
+              xCurrent: currentLocation.xCurrent,
+              yCurrent: currentLocation.yCurrent,
+              direction: currentLocation.direction,
+              orientation: currentLocation.orientation,
+            };
+          }
+        }
+
+        // setting final orientation
+        if (currentLocation.yCurrent === square.ySquare) {
+          currentLocation.orientation = 'S';
+        } else {
+          currentLocation.orientation = 'N';
+        }
+        // setting final location & doneAreas array for front end display
+        this.doneAreas.push(currentLocation);
+        finalLocation.xFinal = currentLocation.xCurrent;
+        finalLocation.yFinal = currentLocation.yCurrent;
+        finalLocation.orientation = currentLocation.orientation;
         return console.log('top right complete !');
       }
 
