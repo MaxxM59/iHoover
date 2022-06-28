@@ -75,11 +75,11 @@
             <mat-form-field appearance="fill">
               <label for="titre"><h2>Orientation initiale</h2></label>
 
-              <mat-select value="N">
-                <mat-option value="N">North</mat-option>
-                <mat-option value="E">East</mat-option>
-                <mat-option value="W">West</mat-option>
-                <mat-option value="S">South</mat-option>
+              <mat-select value="North">
+                <mat-option value="North">North</mat-option>
+                <mat-option value="East">East</mat-option>
+                <mat-option value="West">West</mat-option>
+                <mat-option value="South">South</mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
@@ -101,6 +101,16 @@
             Formidable ! <br />L'aspirateur a terminé son parcours sur la case
             ({{ finalLocation.xFinal }},{{ finalLocation.yFinal }}).
           </h2>
+
+          <table id="result-tab" mat-table class="mat-elevation-z8">
+            <ng-container
+              *ngFor="let done of this.launch.doneAreas; index as i"
+            >
+              <td>
+                Case n° {{ i + 1 }} => ({{ done.xCurrent }},{{ done.yCurrent }})
+              </td>
+            </ng-container>
+          </table>
         </div>
         <div *ngIf="isLoading === true && isOver === false">
           <mat-spinner id="loadingSpinner" [diameter]="50"></mat-spinner>

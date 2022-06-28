@@ -1,3 +1,9 @@
+h1 {
+  display: block;
+  margin: auto;
+  font-size: 220%;
+  padding-bottom: 2vh;
+}
 mat-card {
   border-radius: 15px;
   width: 80%;
@@ -5,7 +11,11 @@ mat-card {
   margin: auto;
   margin-top: 5vh;
 }
-
+mat-form-field {
+  padding-top: 1vh;
+  padding-bottom: 4vh;
+  width: 70%;
+}
 #launchButton {
   background-color: #0388fc;
   display: block;
@@ -15,26 +25,28 @@ mat-card {
   margin-bottom: 2vh;
   color: white;
 }
-mat-form-field {
-  padding-top: 1vh;
-  padding-bottom: 4vh;
-  width: 70%;
-}
-h1 {
-  display: block;
-  margin: auto;
-  font-size: 220%;
-  padding-bottom: 2vh;
-}
 #loadingSpinner {
   margin: auto;
   display: block;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  width: 10%;
 }
 #result {
   text-align: center;
   margin-top: 2vh;
   margin-bottom: 2vh;
+}
+#result-tab {
+  display: block;
+  margin: auto;
+  width: 40%;
+  text-align: center;
+  justify-content: center;
+}
+td,
+tr {
+  width: 100%;
+  display: block;
+  margin: auto;
+  text-align: center;
 }

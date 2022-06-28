@@ -16,8 +16,6 @@ import { LaunchService } from './services/launch.service';
 export class AppComponent implements OnInit {
   constructor(public launch: LaunchService) {}
   title = 'iHoover';
-  // Orientation default value
-  public selected: string = 'North';
   // logic variables
   public square: Square = {
     xSquare: 0,
@@ -34,6 +32,7 @@ export class AppComponent implements OnInit {
     yFinal: 0,
     orientation: '',
   };
+
   // loading handler variables
   isLoading: boolean = false;
   isOver: boolean = false;
@@ -41,40 +40,28 @@ export class AppComponent implements OnInit {
 
   // User form
   squareForm = new FormGroup({
-    xSquare: new FormControl(8, [Validators.required, Validators.min(2)]),
-    ySquare: new FormControl(8, [Validators.required, Validators.min(2)]),
-    xCurrent: new FormControl(7, [Validators.required]),
-    yCurrent: new FormControl(7, [Validators.required]),
-    orientation: new FormControl(''),
+    xSquare: new FormControl(4, [Validators.required, Validators.min(2)]),
+    ySquare: new FormControl(4, [Validators.required, Validators.min(2)]),
+    xCurrent: new FormControl(3, [Validators.required]),
+    yCurrent: new FormControl(3, [Validators.required]),
+    orientation: new FormControl('North', [Validators.required]),
   });
 
   launcher() {
     if (this.squareForm.valid) {
       this.isUntouched = false;
-      // get values from the form
-      this.square.xSquare = Number(this.squareForm.value.xSquare);
-      this.square.ySquare = Number(this.squareForm.value.ySquare);
-      this.currentLocation.xCurrent = Number(this.squareForm.value.xCurrent);
-      this.currentLocation.yCurrent = Number(this.squareForm.value.yCurrent);
-      this.currentLocation.orientation = String(
-        this.squareForm.value.orientation
-      );
-      // check initial direction to choose the right function
 
-      this.isLoading = true;
-      switch (this.squareForm.value.orientation) {
-        case 'N': {
-        }
-        case 'E': {
-        }
-        case 'W': {
-        }
-        case 'S': {
-        }
-        default: {
-          //use NORTh
-        }
-      }
+      // get values from the form
+      this.square = {
+        xSquare: Number(this.squareForm.value.xSquare),
+        ySquare: Number(this.squareForm.value.ySquare),
+      };
+      this.currentLocation = {
+        xCurrent: Number(this.squareForm.value.xCurrent),
+        yCurrent: Number(this.squareForm.value.xCurrent),
+        orientation: String(this.squareForm.value.orientation),
+        direction: '',
+      };
 
       this.launch.launchHoover(
         this.square,
