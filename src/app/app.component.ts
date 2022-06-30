@@ -23,6 +23,9 @@ export class AppComponent implements OnInit {
         yFinal: 0,
         finalcurrentOrientation: '',
     };
+    // clone the object
+    finalLocationLauch = structuredClone(this.finalLocation);
+
     // loading handler variables
     isLoading: boolean = false;
     isOver: boolean = false;
@@ -30,8 +33,8 @@ export class AppComponent implements OnInit {
 
     // User form
     squareForm = new FormGroup({
-        xSquare: new FormControl(4, [Validators.required, Validators.min(2)]),
-        ySquare: new FormControl(4, [Validators.required, Validators.min(2)]),
+        xSquare: new FormControl(10, [Validators.required, Validators.min(2)]),
+        ySquare: new FormControl(10, [Validators.required, Validators.min(2)]),
         xCurrent: new FormControl(3, [Validators.required]),
         yCurrent: new FormControl(3, [Validators.required]),
         currentOrientation: new FormControl('North', [Validators.required]),

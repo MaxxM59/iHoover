@@ -2,33 +2,33 @@ import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { LaunchService } from './services/launch.service';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, FormsModule],
-      declarations: [AppComponent],
-    }).compileComponents();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [LaunchService],
+            declarations: [AppComponent],
+        }).compileComponents();
+    });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    it(`should have coords on finish'`, () => {
+        const fixture = TestBed.createComponent(AppComponent);
+        const app = fixture.componentInstance;
+        expect(app.currentLocation).toBeDefined();
+    });
+});
+describe('AppComponent', () => {
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [LaunchService],
+            declarations: [AppComponent],
+        }).compileComponents();
+    });
 
-  it(`should have as title 'iHoover'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('iHoover');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'iHoover app is running!'
-    );
-  });
+    it(`should return possitive number`, () => {
+        const fixture = TestBed.createComponent(AppComponent);
+        const app = fixture.componentInstance;
+        expect(app.currentLocation).toBePositiveInfinity();
+    });
 });
