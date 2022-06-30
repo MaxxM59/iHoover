@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
 
     // User form
     squareForm = new FormGroup({
-        xSquare: new FormControl(10, [Validators.required, Validators.min(2)]),
-        ySquare: new FormControl(10, [Validators.required, Validators.min(2)]),
+        xSquare: new FormControl(5, [Validators.required, Validators.min(2)]),
+        ySquare: new FormControl(5, [Validators.required, Validators.min(2)]),
         xCurrent: new FormControl(3, [Validators.required]),
         yCurrent: new FormControl(3, [Validators.required]),
         currentOrientation: new FormControl('North', [Validators.required]),

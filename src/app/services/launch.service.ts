@@ -200,8 +200,6 @@ export class LaunchService {
                         currentLocation.xCurrent--;
                         currentLocation.currentDirection = 'D';
                         currentOrientation = 'N';
-                        // save current location (top/bottom of last col)
-                        this.doneAreas.push([currentLocation.xCurrent, currentLocation.yCurrent]);
                     }
                     // save current location
                     this.doneAreas.push([currentLocation.xCurrent, currentLocation.yCurrent]);
@@ -419,11 +417,6 @@ export class LaunchService {
                             currentLocation.xCurrent++;
                             currentLocation.currentDirection = 'G';
                             currentOrientation = 'N';
-                            // save current location (top/bottom of last col)
-                            this.doneAreas.push([
-                                currentLocation.xCurrent,
-                                currentLocation.yCurrent,
-                            ]);
                         }
                         // save current location
                         this.doneAreas.push([currentLocation.xCurrent, currentLocation.yCurrent]);
@@ -639,8 +632,6 @@ export class LaunchService {
                         currentLocation.xCurrent--;
                         currentLocation.currentDirection = 'D';
                         currentOrientation = 'N';
-                        // save current location (top/bottom of last col)
-                        this.doneAreas.push([currentLocation.xCurrent, currentLocation.yCurrent]);
                     }
                     // save current location
                     this.doneAreas.push([currentLocation.xCurrent, currentLocation.yCurrent]);
@@ -858,11 +849,6 @@ export class LaunchService {
                             currentLocation.xCurrent++;
                             currentLocation.currentDirection = 'G';
                             currentOrientation = 'N';
-                            // save current location (top/bottom of last col)
-                            this.doneAreas.push([
-                                currentLocation.xCurrent,
-                                currentLocation.yCurrent,
-                            ]);
                         }
                         // save current location
                         this.doneAreas.push([currentLocation.xCurrent, currentLocation.yCurrent]);
