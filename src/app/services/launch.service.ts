@@ -1,81 +1,96 @@
 import { Injectable } from '@angular/core';
-import { CurrentLocation, FinalLocation, Square } from '../models/model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LaunchService {
   constructor() {}
-  doneAreas: Array<CurrentLocation> = [];
+  // global path array storing the path locations
+  doneAreas: any[][] = [];
 
   launchHoover(
-    square: Square,
-    currentLocation: CurrentLocation,
-    finalLocation: FinalLocation
+    // logic variables
+    square: { xSquare: number; ySquare: number },
+    currentLocation: {
+      xCurrent: number;
+      yCurrent: number;
+      currentDirection: string;
+    },
+    finalLocation: {
+      xFinal: number;
+      yFinal: number;
+      finalcurrentOrientation: string;
+    },
+    currentOrientation: string
   ) {
-    square = square;
-    currentLocation = currentLocation;
+    // Empty the global array so you don't get olders launches paths
+    this.doneAreas = [];
+    // Get initial data
+    this.doneAreas.push([currentLocation.xCurrent, currentLocation.yCurrent]);
 
-    this.doneAreas.push(currentLocation);
     // Spliting the area in 4 sub-areas
     switch (true && true) {
       // top right
       case currentLocation.xCurrent >= square.xSquare / 2 &&
         currentLocation.yCurrent >= square.ySquare / 2: {
-        //check initial direction and go to east
+        //check initial currentLocation.currentDirection and go to east
         if (currentLocation.xCurrent !== square.xSquare) {
-          switch (currentLocation.orientation) {
+          switch (currentOrientation) {
             case 'North':
               {
-                currentLocation.direction = 'D';
-                currentLocation.orientation = 'E';
+                currentLocation.currentDirection = 'D';
+                currentOrientation = 'E';
               }
               break;
 
             case 'West':
               {
-                currentLocation.direction = 'DD';
-                currentLocation.orientation = 'E';
+                currentLocation.currentDirection = 'DD';
+                currentOrientation = 'E';
               }
               break;
             case 'South': {
-              currentLocation.direction = 'G';
-              currentLocation.orientation = 'E';
+              currentLocation.currentDirection = 'G';
+              currentOrientation = 'E';
             }
             case 'East':
               {
-                currentLocation.orientation = 'E';
+                currentOrientation = 'E';
               }
               break;
             default:
-              return console.log('No direction top right');
+              return console.log(
+                'No currentLocation.currentDirection top right'
+              );
           }
         } else {
-          switch (currentLocation.orientation) {
+          switch (currentOrientation) {
             case 'North':
               {
-                currentLocation.direction = 'G';
-                currentLocation.orientation = 'W';
+                currentLocation.currentDirection = 'G';
+                currentOrientation = 'W';
               }
               break;
 
             case 'West':
               {
-                currentLocation.orientation = 'W';
+                currentOrientation = 'W';
               }
               break;
             case 'South': {
-              currentLocation.direction = 'D';
-              currentLocation.orientation = 'W';
+              currentLocation.currentDirection = 'D';
+              currentOrientation = 'W';
             }
             case 'East':
               {
-                currentLocation.direction = 'DD';
-                currentLocation.orientation = 'W';
+                currentLocation.currentDirection = 'DD';
+                currentOrientation = 'W';
               }
               break;
             default:
-              return console.log('No direction top right');
+              return console.log(
+                'No currentLocation.currentDirection top right'
+              );
           }
         }
 
@@ -83,190 +98,142 @@ export class LaunchService {
         while (currentLocation.xCurrent !== square.xSquare - 1) {
           // in case the hoover is on the last column
           if (currentLocation.xCurrent === square.xSquare) {
-            currentLocation.direction = 'A';
+            currentLocation.currentDirection = 'A';
             currentLocation.xCurrent--;
             // save current location
-            currentLocation = {
-              xCurrent: currentLocation.xCurrent,
-              yCurrent: currentLocation.yCurrent,
-              direction: currentLocation.direction,
-              orientation: currentLocation.orientation,
-            };
+            this.doneAreas.push([
+              currentLocation.xCurrent,
+              currentLocation.yCurrent,
+            ]);
           }
           // else going to xSqare-1 col as planned
           else {
-            currentLocation.direction = 'A';
+            currentLocation.currentDirection = 'A';
             currentLocation.xCurrent++;
             // save current location
-            currentLocation = {
-              xCurrent: currentLocation.xCurrent,
-              yCurrent: currentLocation.yCurrent,
-              direction: currentLocation.direction,
-              orientation: currentLocation.orientation,
-            };
+            this.doneAreas.push([
+              currentLocation.xCurrent,
+              currentLocation.yCurrent,
+            ]);
           }
-
-          this.doneAreas.push(currentLocation);
         }
 
-        currentLocation.direction = 'G';
-        currentLocation.orientation = 'N';
+        currentLocation.currentDirection = 'G';
+        currentOrientation = 'N';
         // go to the highest line
         while (currentLocation.yCurrent !== square.ySquare) {
-          currentLocation.direction = 'A';
+          currentLocation.currentDirection = 'A';
           currentLocation.yCurrent++;
           // save current location
-          currentLocation = {
-            xCurrent: currentLocation.xCurrent,
-            yCurrent: currentLocation.yCurrent,
-            direction: currentLocation.direction,
-            orientation: currentLocation.orientation,
-          };
-          this.doneAreas.push(currentLocation);
+          this.doneAreas.push([
+            currentLocation.xCurrent,
+            currentLocation.yCurrent,
+          ]);
         }
 
         // turn to get on the last column
-        currentLocation.direction = 'D';
-        currentLocation.orientation = 'E';
-        currentLocation.direction = 'A';
+        currentLocation.currentDirection = 'D';
+        currentOrientation = 'E';
+        currentLocation.currentDirection = 'A';
         currentLocation.xCurrent++;
+        currentLocation.currentDirection = 'D';
+        currentOrientation = 'S';
         // save current location
-        currentLocation = {
-          xCurrent: currentLocation.xCurrent,
-          yCurrent: currentLocation.yCurrent,
-          direction: currentLocation.direction,
-          orientation: currentLocation.orientation,
-        };
-        this.doneAreas.push(currentLocation);
-        currentLocation.direction = 'D';
-        currentLocation.orientation = 'S';
-
+        this.doneAreas.push([
+          currentLocation.xCurrent,
+          currentLocation.yCurrent,
+        ]);
         // loop over the remainings columns till col 1
         while (currentLocation.xCurrent > 0) {
           // check if the hoover is at the top of the area
           if (currentLocation.yCurrent === square.ySquare) {
             for (let i = 0; i < square.ySquare; i++) {
-              currentLocation.direction = 'A';
+              currentLocation.currentDirection = 'A';
               currentLocation.yCurrent--;
               // save current location
-              currentLocation = {
-                xCurrent: currentLocation.xCurrent,
-                yCurrent: currentLocation.yCurrent,
-                direction: currentLocation.direction,
-                orientation: currentLocation.orientation,
-              };
-              this.doneAreas.push(currentLocation);
+              this.doneAreas.push([
+                currentLocation.xCurrent,
+                currentLocation.yCurrent,
+              ]);
             }
           }
           // else the hoover is at the bottom of the area
           else {
             for (let i = 0; i < square.ySquare; i++) {
-              currentLocation.direction = 'A';
+              currentLocation.currentDirection = 'A';
               currentLocation.yCurrent++;
               // save current location
-              currentLocation = {
-                xCurrent: currentLocation.xCurrent,
-                yCurrent: currentLocation.yCurrent,
-                direction: currentLocation.direction,
-                orientation: currentLocation.orientation,
-              };
-              this.doneAreas.push(currentLocation);
+              this.doneAreas.push([
+                currentLocation.xCurrent,
+                currentLocation.yCurrent,
+              ]);
             }
           }
           // turning left if the hoover is on top
           if (currentLocation.yCurrent === square.ySquare) {
-            currentLocation.direction = 'G';
-            currentLocation.direction = 'A';
+            currentLocation.currentDirection = 'G';
+            currentLocation.currentDirection = 'A';
             currentLocation.xCurrent--;
-            currentLocation.direction = 'G';
-            currentLocation.orientation = 'S';
-            // save current location
-            currentLocation = {
-              xCurrent: currentLocation.xCurrent,
-              yCurrent: currentLocation.yCurrent,
-              direction: currentLocation.direction,
-              orientation: currentLocation.orientation,
-            };
+            currentLocation.currentDirection = 'G';
+            currentOrientation = 'S';
           }
           // else it's at the bottom so turning right
           else {
-            currentLocation.direction = 'D';
-            currentLocation.direction = 'A';
+            currentLocation.currentDirection = 'D';
+            currentLocation.currentDirection = 'A';
             currentLocation.xCurrent--;
-            currentLocation.direction = 'D';
-            currentLocation.orientation = 'N';
+            currentLocation.currentDirection = 'D';
+            currentOrientation = 'N';
             // save current location (top/bottom of last col)
-            currentLocation = {
-              xCurrent: currentLocation.xCurrent,
-              yCurrent: currentLocation.yCurrent,
-              direction: currentLocation.direction,
-              orientation: currentLocation.orientation,
-            };
+            this.doneAreas.push([
+              currentLocation.xCurrent,
+              currentLocation.yCurrent,
+            ]);
           }
-
-          this.doneAreas.push(currentLocation);
+          // save current location
+          this.doneAreas.push([
+            currentLocation.xCurrent,
+            currentLocation.yCurrent,
+          ]);
         }
         // Doing the last col
         if (currentLocation.yCurrent === square.ySquare) {
           //if the hoover starts last col from the top of area
 
           for (let i = 0; i < square.ySquare; i++) {
-            currentLocation.direction = 'A';
+            currentLocation.currentDirection = 'A';
             currentLocation.yCurrent--;
 
-            this.doneAreas.push(currentLocation);
-
             // save current location
-            currentLocation = {
-              xCurrent: currentLocation.xCurrent,
-              yCurrent: currentLocation.yCurrent,
-              direction: currentLocation.direction,
-              orientation: currentLocation.orientation,
-            };
-            console.log(
-              'loop n°',
-              i,
-              'location :',
+            this.doneAreas.push([
               currentLocation.xCurrent,
-              currentLocation.yCurrent
-            );
+              currentLocation.yCurrent,
+            ]);
           }
         }
         // else starting from bottom
         else if (currentLocation.yCurrent === 0) {
           for (let i = 0; i < square.ySquare; i++) {
-            currentLocation.direction = 'A';
+            currentLocation.currentDirection = 'A';
             currentLocation.yCurrent++;
-            this.doneAreas.push(currentLocation);
             // save current location
-            currentLocation = {
-              xCurrent: currentLocation.xCurrent,
-              yCurrent: currentLocation.yCurrent,
-              direction: currentLocation.direction,
-              orientation: currentLocation.orientation,
-            };
-            console.log(
-              'loop n°',
-              i,
-              'location :',
+            this.doneAreas.push([
               currentLocation.xCurrent,
-              currentLocation.yCurrent
-            );
+              currentLocation.yCurrent,
+            ]);
           }
-        } else {
-          break;
         }
-        // setting final orientation
+        // setting final currentOrientation
         if (currentLocation.yCurrent === square.ySquare) {
-          currentLocation.orientation = 'S';
+          currentOrientation = 'S';
         } else {
-          currentLocation.orientation = 'N';
+          currentOrientation = 'N';
         }
         // setting final location & doneAreas array for front end display
 
         finalLocation.xFinal = currentLocation.xCurrent;
         finalLocation.yFinal = currentLocation.yCurrent;
-        finalLocation.orientation = currentLocation.orientation;
+        finalLocation.finalcurrentOrientation = currentOrientation;
         return console.log('top right complete !');
       }
 
@@ -292,11 +259,7 @@ export class LaunchService {
         return console.log('bottom left compelte !');
 
       default: {
-        return (
-          (finalLocation.xFinal = currentLocation.xCurrent),
-          (finalLocation.yFinal = currentLocation.yCurrent),
-          (finalLocation.orientation = currentLocation.orientation)
-        );
+        return null;
       }
     }
   }

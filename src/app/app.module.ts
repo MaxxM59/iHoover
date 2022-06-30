@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -24,7 +23,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     FormsModule,
     BrowserAnimationsModule,
-
     MatProgressSpinnerModule,
     MatSelectModule,
   ],

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Square, CurrentLocation, FinalLocation } from './models/model';
 import { LaunchService } from './services/launch.service';
 
 @Component({
@@ -12,22 +11,18 @@ export class AppComponent implements OnInit {
   constructor(public launch: LaunchService) {}
   title = 'iHoover';
   // logic variables
-  public square: Square = {
-    xSquare: 0,
-    ySquare: 0,
-  };
-  public currentLocation: CurrentLocation = {
+  square = { xSquare: 0, ySquare: 0 };
+  currentLocation = {
     xCurrent: 0,
     yCurrent: 0,
-    direction: '',
-    orientation: '',
+    currentDirection: '',
   };
-  public finalLocation: FinalLocation = {
+  currentOrientation: string = '';
+  finalLocation = {
     xFinal: 0,
     yFinal: 0,
-    orientation: '',
+    finalcurrentOrientation: '',
   };
-
   // loading handler variables
   isLoading: boolean = false;
   isOver: boolean = false;
@@ -39,13 +34,12 @@ export class AppComponent implements OnInit {
     ySquare: new FormControl(4, [Validators.required, Validators.min(2)]),
     xCurrent: new FormControl(3, [Validators.required]),
     yCurrent: new FormControl(3, [Validators.required]),
-    orientation: new FormControl('North', [Validators.required]),
+    currentOrientation: new FormControl('North', [Validators.required]),
   });
 
   launcher() {
     if (this.squareForm.valid) {
       this.isUntouched = false;
-
       // get values from the form
       this.square = {
         xSquare: Number(this.squareForm.value.xSquare),
@@ -53,17 +47,20 @@ export class AppComponent implements OnInit {
       };
       this.currentLocation = {
         xCurrent: Number(this.squareForm.value.xCurrent),
-        yCurrent: Number(this.squareForm.value.xCurrent),
-        orientation: String(this.squareForm.value.orientation),
-        direction: '',
+        yCurrent: Number(this.squareForm.value.yCurrent),
+        currentDirection: '',
       };
+
+      this.currentOrientation = String(
+        this.squareForm.value.currentOrientation
+      );
 
       this.launch.launchHoover(
         this.square,
         this.currentLocation,
-        this.finalLocation
+        this.finalLocation,
+        this.currentOrientation
       );
-
       this.isLoading = false;
       this.isOver = true;
     } else {

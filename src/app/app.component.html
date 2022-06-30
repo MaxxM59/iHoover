@@ -22,6 +22,7 @@
 
         <mat-form-field appearance="fill">
           <label for="titre"><h2>Hauteur de la surface</h2></label>
+
           <input
             matInput
             type="number"
@@ -91,15 +92,18 @@
               <h1 id="result-title">
                 Formidable ! <br />L'aspirateur a terminé son parcours sur la
                 case ({{ finalLocation.xFinal }},{{ finalLocation.yFinal }}).
+                <br />
+                L'Orientation finale est
+                {{ finalLocation.finalcurrentOrientation }}.
               </h1></mat-card-header
             >
             <mat-card-content>
               <h2>Voici le détail du parcours effectué :</h2>
               <ng-container
                 *ngFor="let done of this.launch.doneAreas; index as i"
-                >Case n° {{ i + 1 }} => ({{ done.xCurrent }},{{
-                  done.yCurrent
-                }}) <br />
+                ><div class="display-result">
+                  Case n° {{ i + 1 }} => ({{ done[0] }},{{ done[1] }})
+                </div>
               </ng-container>
             </mat-card-content>
           </mat-card>
