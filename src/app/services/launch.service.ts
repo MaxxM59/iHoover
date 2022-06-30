@@ -227,9 +227,9 @@ export class LaunchService {
                 }
                 // setting final currentOrientation
                 if (currentLocation.yCurrent === square.ySquare) {
-                    currentOrientation = 'S';
-                } else {
                     currentOrientation = 'N';
+                } else {
+                    currentOrientation = 'S';
                 }
                 // setting final location for front end display
 
@@ -450,9 +450,9 @@ export class LaunchService {
                     }
                     // setting final currentOrientation
                     if (currentLocation.yCurrent === square.ySquare) {
-                        currentOrientation = 'S';
-                    } else {
                         currentOrientation = 'N';
+                    } else {
+                        currentOrientation = 'S';
                     }
                     // setting final location for front end display
 
@@ -659,9 +659,9 @@ export class LaunchService {
                 }
                 // setting final currentOrientation
                 if (currentLocation.yCurrent === square.ySquare) {
-                    currentOrientation = 'S';
-                } else {
                     currentOrientation = 'N';
+                } else {
+                    currentOrientation = 'S';
                 }
                 // setting final location for front end display
 
@@ -882,9 +882,9 @@ export class LaunchService {
                     }
                     // setting final currentOrientation
                     if (currentLocation.yCurrent === square.ySquare) {
-                        currentOrientation = 'S';
-                    } else {
                         currentOrientation = 'N';
+                    } else {
+                        currentOrientation = 'S';
                     }
                     // setting final location for front end display
 

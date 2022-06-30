@@ -1,48 +1,49 @@
 #main-title {
-  display: block;
-  margin: auto;
-  font-size: 220%;
-  padding-bottom: 2vh;
+    display: block;
+    margin: auto;
+    font-size: 220%;
+    padding-bottom: 2vh;
 }
 mat-card {
-  border-radius: 15px;
-  width: 80%;
-  display: block;
-  margin: auto;
+    border-radius: 15px;
+    width: 80%;
+    display: block;
+    margin: auto;
 }
 
 mat-form-field {
-  width: 50vw;
-  display: block;
-  margin: auto;
-  padding-bottom: 2vh;
+    width: 50vw;
+    display: block;
+    margin: auto;
+    padding-bottom: 2vh;
 }
 form {
-  min-height: 300px;
+    min-height: 300px;
 }
 .buttonSquareForm {
-  background-color: #0388fc;
-  display: block;
-  margin: auto;
-  width: 35%;
-  margin-top: 4vh;
-  margin-bottom: 2vh;
-  color: white;
+    background-color: #0388fc;
+    display: block;
+    margin: auto;
+    width: 35%;
+    max-width: 240px;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    color: white;
 }
 #loadingSpinner {
-  margin: auto;
-  display: block;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+    margin: auto;
+    display: block;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 #result {
-  text-align: center;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+    text-align: center;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 #result-title {
-  display: block;
-  margin: auto;
-  font-size: 150%;
-  padding-bottom: 2vh;
+    display: block;
+    margin: auto;
+    font-size: 150%;
+    padding-bottom: 2vh;
 }
