@@ -9,7 +9,6 @@ import { LaunchService } from './services/launch.service';
 })
 export class AppComponent implements OnInit {
     constructor(public launch: LaunchService) {}
-    title = 'iHoover';
     // logic variables
     square = { xSquare: 0, ySquare: 0 };
     currentLocation = {
